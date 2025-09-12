@@ -24,7 +24,7 @@ public class TypeSpriteService {
         if (cache.containsKey(cacheKey)) {
             return cache.get(cacheKey);
         } 
-        String url = ApiEndpoints.TYPE + "/" + typeName;
+        String url = ApiEndpoints.TYPE + typeName;
         @SuppressWarnings("unchecked")
         Map<String, Object> response = Objects.requireNonNull(restTemplate.getForObject(url, Map.class));
 

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.pokedex.app.Service.PokemonDetailsService;
+import com.pokedex.app.model.PokemonDto;
 import com.pokedex.app.model.PokemonResponse;
 import com.pokedex.app.model.PokemonResults;
 
@@ -19,6 +21,11 @@ import com.pokedex.app.model.PokemonResults;
 @RequestMapping(ApiEndpoints.BASE_API)
 public class PokeApiController {
     private final RestTemplate restTemplate = new RestTemplate();
+    private final PokemonDetailsService pokemonDetailsService;
+
+    public PokeApiController(PokemonDetailsService pokemonDetailsService) {
+        this.pokemonDetailsService = pokemonDetailsService;
+    }
 
     // Returns all pokemon based on limit (doing up to end of gen 4 for now)
     @SuppressWarnings("null")
@@ -32,11 +39,11 @@ public class PokeApiController {
         return ResponseEntity.ok(response.getResults());
     }
 
-    // Returns 1 pokemon based on name
-    @GetMapping(ApiEndpoints.POKEMON + "{name}")
-    public ResponseEntity<String> getPokemon(@PathVariable String name) {
-        String url = ApiEndpoints.POKEMON + name.toLowerCase();
-        String response = restTemplate.getForObject(url, String.class);
-        return ResponseEntity.ok(response);
+    // Returns 1 pokemonDto based on name or id
+    @GetMapping(ApiEndpoints.POKEMON + "{nameOrId}")
+    public ResponseEntity<PokemonDto> getPokemon(@PathVariable String nameOrId, 
+                                             @RequestParam(defaultValue = "generation-iv") String generation,
+                                             @RequestParam(defaultValue = "platinum") String gameName) {
+        return ResponseEntity.ok(pokemonDetailsService.getPokemonDetails(nameOrId, generation, gameName));
     }
 }
