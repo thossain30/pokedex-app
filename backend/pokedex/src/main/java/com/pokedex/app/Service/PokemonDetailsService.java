@@ -64,7 +64,7 @@ public class PokemonDetailsService {
                               .filter(g -> "en".equals(((Map<String, String>) g.get("language")).get("name")))
                               .map(g -> (String) g.get("genus"))
                               .findFirst()
-                              .orElse("Unknown Pokemon");
+                              .orElse("???????");
         pokemonDto.setTitle(englishTitle);
 
         List<Map<String, Object>> flavorTextEntries = (List<Map<String, Object>>) speciesData.get("flavor_text_entries");

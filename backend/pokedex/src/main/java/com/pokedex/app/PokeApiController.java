@@ -18,7 +18,7 @@ import com.pokedex.app.model.PokemonResponse;
 import com.pokedex.app.model.PokemonResults;
 
 @RestController
-@RequestMapping(ApiEndpoints.BASE_API)
+@RequestMapping()
 public class PokeApiController {
     private final RestTemplate restTemplate = new RestTemplate();
     private final PokemonDetailsService pokemonDetailsService;
@@ -29,7 +29,7 @@ public class PokeApiController {
 
     // Returns all pokemon based on limit (doing up to end of gen 4 for now)
     @SuppressWarnings("null")
-    @GetMapping(ApiEndpoints.POKEMON)
+    @GetMapping("/pokemon")
     public ResponseEntity<List<PokemonResults>> getAllPokemon(@RequestParam(defaultValue = "" + Constants.GEN_4_LIMIT) int limit) {
         String url = UriComponentsBuilder
             .fromHttpUrl(ApiEndpoints.POKEMON)
@@ -40,7 +40,7 @@ public class PokeApiController {
     }
 
     // Returns 1 pokemonDto based on name or id
-    @GetMapping(ApiEndpoints.POKEMON + "{nameOrId}")
+    @GetMapping("/pokemon/{nameOrId}")
     public ResponseEntity<PokemonDto> getPokemon(@PathVariable String nameOrId, 
                                              @RequestParam(defaultValue = "generation-iv") String generation,
                                              @RequestParam(defaultValue = "platinum") String gameName) {
