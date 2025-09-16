@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
+import SearchBar from './components/SearchBar';
 
 function App() {
-  const template = require('./assets/pokedex_entry_template.jpg');
+  const template = require('./assets/pokedex_entry_template_2.jpg');
   return (
     <div className="App">
       <header className="App-header">
+        <SearchBar />
         <img 
           className="App-link" 
           src={template}

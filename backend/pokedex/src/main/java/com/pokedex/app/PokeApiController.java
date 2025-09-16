@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import com.pokedex.app.model.PokemonResults;
 
 @RestController
 @RequestMapping()
+@CrossOrigin(origins = "http://localhost:3000") // allow requests from React
 public class PokeApiController {
     private final RestTemplate restTemplate = new RestTemplate();
     private final PokemonDetailsService pokemonDetailsService;
