@@ -1,0 +1,10 @@
+/* .searchbarContainer {
+    position: relative;
+    top: 63px;
+} */
+
+input {
+    font-size: 72px;
+    /* position: relative;
+    top: -5px; */
+}

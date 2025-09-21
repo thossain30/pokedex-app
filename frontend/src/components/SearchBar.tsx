@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ENDPOINTS } from "../config/endpoints";
+import './Searchbar.css'
 
 function SearchBar() {
     const [query, setQuery] = useState("");
@@ -31,7 +32,7 @@ function SearchBar() {
     }
 
     return (
-        <div className="relative w-64">
+        <div className="searchbarContainer">
             <input 
                 type="text"
                 value={query}

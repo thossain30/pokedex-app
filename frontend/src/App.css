@@ -1,3 +1,17 @@
+:root {
+  --color-yellow: #f9f8c0;
+  --color-grey: #595854;
+}
+
+.yellow-bg {
+  background-color: var(--color-yellow);
+  color: var(--color-grey);
+}
+
+.searchbar {
+  top: 63px;
+}
+
 .App {
   text-align: center;
 }

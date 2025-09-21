@@ -7,9 +7,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <SearchBar />
-        <img 
-          className="App-link" 
+        <div className="yellow-bg searchbar">
+          <SearchBar />
+        </div>
+        <img
           src={template}
           style={
             { width: "100vw", height: "100vh" }
