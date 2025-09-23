@@ -1,10 +1,13 @@
-/* .searchbarContainer {
-    position: relative;
-    top: 63px;
-} */
+:root {
+  --color-yellow: #f9f8c0;
+  --color-grey: #595854;
+}
 
 input {
-    font-size: 72px;
-    /* position: relative;
-    top: -5px; */
+    font-size: 48px;
+}
+
+.yellow-bg {
+  background-color: var(--color-yellow);
+  color: var(--color-grey);
 }

@@ -12,6 +12,10 @@ function SearchBar() {
         name: string,
         id: number
     }
+
+    function capitalizeFirstLetter(str: string) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
     
     const fetchAllPokemon = async () => {
         if (loaded) return;
@@ -22,7 +26,7 @@ function SearchBar() {
 
             const pokemonList = data.map((poke: {name: string, url: string}) => {
                 const id = parseInt(poke.url.split("/").filter(Boolean).pop()!)
-                return { id, name: poke.name };
+                return { id, name: capitalizeFirstLetter(poke.name) };
             })
             setOptions(pokemonList);
             setLoaded(true);
@@ -43,11 +47,11 @@ function SearchBar() {
                     setShowDropdown(true);
                 }}
                 onBlur={() => setTimeout(() => setShowDropdown(false), 200)}
-                className="w-full border rounded p-2"
+                className="w-full p-2"
             />
 
             {showDropdown && options.length > 0 && (
-                <ul className="absolute z-10 bg-white border w-full max-h-60 overflow-y-auto rounded shadow">
+                <ul className="z-10 yellow-bg w-full max-h-60 overflow-y-auto rounded shadow">
                     {options.filter((poke) => 
                         poke.name.toLowerCase().includes(query.toLowerCase())
                     )

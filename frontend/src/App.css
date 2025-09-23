@@ -1,15 +1,17 @@
+@import "./output.css";
+
 :root {
   --color-yellow: #f9f8c0;
   --color-grey: #595854;
 }
 
+body {
+  font-family: "PokemonFont", sans-serif;
+}
+
 .yellow-bg {
   background-color: var(--color-yellow);
   color: var(--color-grey);
-}
-
-.searchbar {
-  top: 63px;
 }
 
 .App {
@@ -28,7 +30,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: var(--color-yellow);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -49,4 +51,11 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@font-face {
+  font-family: "PokemonFont";
+  src: url("../public/fonts/pokemon-dp-pro.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
