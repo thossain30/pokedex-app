@@ -4,10 +4,10 @@
 }
 
 input {
-    font-size: 48px;
+    font-size: 5vw;
 }
 
-.yellow-bg {
+.searchbarContainer {
   background-color: var(--color-yellow);
   color: var(--color-grey);
 }

@@ -1,0 +1,13 @@
+.dropdownContainer {
+  background-color: var(--color-yellow);
+  color: var(--color-grey);
+}
+
+.dropdownContainer option {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+select {
+    font-size: 4vw;
+}
