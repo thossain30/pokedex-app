@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import PokemonSearchOverlay from './components/PokemonSearchOverlay/PokemonSearchOverlay';
+import PokemonDisplayContainer from './components/PokemonDisplayContainer/PokemonDisplayContainer';
 
 function App() {
   const template = require('./assets/pokedex_entry_template_2.jpg');
@@ -20,7 +21,7 @@ function App() {
             left: "50%",       // relative to container width
           }}
         >
-          <PokemonSearchOverlay />
+          <PokemonDisplayContainer />
         </div>
       </header>
     </div>

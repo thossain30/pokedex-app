@@ -1,0 +1,71 @@
+import { useEffect, useState } from "react";
+import { Pokemon, PokemonDetails } from "../../config/Helpers";
+import { ENDPOINTS } from "../../config/endpoints";
+import PokemonSearchOverlay from "../PokemonSearchOverlay/PokemonSearchOverlay";
+import PokemonSprite from "../PokemonSprite/pokemonSprite";
+
+export default function PokemonDisplayContainer() {
+    const [selectedPokemon, setSelectedPokemon] = useState<PokemonDetails | null>(null);
+    const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
+
+    useEffect(() => {
+        const fetchPokemonList = async () => {
+            try {
+                const res = await fetch(ENDPOINTS.ALL_POKEMON);
+                const data = await res.json();
+
+                console.log(data);
+
+                const list: Pokemon[] = data.map(
+                (poke: { name: string; url: string }) => {
+                    const id = parseInt(poke.url.split("/").filter(Boolean).pop()!);
+                    return { id, name: poke.name };
+                }
+                );
+
+                setPokemonList(list);
+            } catch (err) {
+                console.error("Error fetching Pokémon:", err);
+            }
+        };
+    fetchPokemonList();
+  }, []);
+
+    const findSelectedPokemon = async (value: string | number) => {
+        let data;
+        try {
+            const match = await fetch(ENDPOINTS.POKEMON_BY_ID(value));
+            data = await match.json();
+        } catch(err) {
+            console.error("Error fetching selected Pokémon:", err);
+            data = null;
+        }
+        setSelectedPokemon(data);
+    }
+
+    return (
+        <div className="flex flex-col items-center w-full relative"
+                style={{
+                    top: "10%",
+                    left: "50%",
+                    transform: "translateX(-50%)"
+                }}
+        >
+            <PokemonSearchOverlay 
+                onSelectPokemon={ findSelectedPokemon } 
+                pokemonList={pokemonList} 
+            />
+            { selectedPokemon && (
+                <div className="absolute z-10 flex flex-col items-center mt-4"
+                    style={{
+                        bottom: "-100%",
+                        left: "-58%",
+                        transform: "translateX(-50%)",
+                    }}
+                >
+                    <PokemonSprite {...selectedPokemon}/>
+                </div>
+            )}
+        </div>
+    )
+}
