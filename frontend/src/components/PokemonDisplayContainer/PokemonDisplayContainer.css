@@ -1,0 +1,14 @@
+flex-col > * {
+    position: absolute;
+}
+
+.description {
+    width: 150%;
+    top: 150%;
+    left: 10%;
+    transform: translateY(150%);
+    font-size: 4.5vw;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}

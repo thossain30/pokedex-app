@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css';
-import PokemonSearchOverlay from './components/PokemonSearchOverlay/PokemonSearchOverlay';
 import PokemonDisplayContainer from './components/PokemonDisplayContainer/PokemonDisplayContainer';
 
 function App() {
   const template = require('./assets/pokedex_entry_template_2.jpg');
   return (
     <div className="App">
-      <header className="App-header relative w-screen h-screen">
+      <header className="App-header relative w-full max-w-[400px] aspect-[256/192] mx-auto">
         <img
           src={template}
           alt="Background"

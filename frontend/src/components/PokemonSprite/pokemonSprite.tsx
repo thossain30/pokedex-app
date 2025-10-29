@@ -1,19 +1,14 @@
 import { PokemonDetails } from "../../config/Helpers";
+import './pokemonSprite.css';
 
 const PokemonSprite = (pokemon: PokemonDetails | null) => {
     if (!pokemon) return null;
+    else {
+        console.log("Rendering sprite for:", pokemon.spriteUrl);
+    }
     return (
-        <div>
-            <img src={pokemon.spriteUrl} alt={pokemon.name} 
-                className="object-contain mt-2"
-                style={{
-                    top: "40%",   // vertical position
-                    left: "40%",  // horizontal position
-                    transform: "translate(-17%, 22%)",
-                    height: "20vw",
-                    width: "auto"
-                }}
-            />
+        <div className="spriteContainer">
+            <img src={pokemon.spriteUrl} alt={pokemon.name} className="sprite object-contain mt-2"/>
         </div>
     )
 }

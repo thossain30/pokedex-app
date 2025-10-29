@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Pokemon, PokemonDetails } from "../../config/Helpers";
 import { ENDPOINTS } from "../../config/endpoints";
+import './PokemonDisplayContainer.css';
 import PokemonSearchOverlay from "../PokemonSearchOverlay/PokemonSearchOverlay";
 import PokemonSprite from "../PokemonSprite/pokemonSprite";
 
@@ -35,35 +36,34 @@ export default function PokemonDisplayContainer() {
         let data;
         try {
             const match = await fetch(ENDPOINTS.POKEMON_BY_ID(value));
+            console.log("Fetched selected Pokémon:", match);
             data = await match.json();
         } catch(err) {
             console.error("Error fetching selected Pokémon:", err);
+            console.log("Value:", value);
             data = null;
         }
         setSelectedPokemon(data);
     }
 
     return (
-        <div className="flex flex-col items-center w-full relative"
-                style={{
-                    top: "10%",
-                    left: "50%",
-                    transform: "translateX(-50%)"
-                }}
-        >
+        <div className="flex flex-col items-center w-full relative">
             <PokemonSearchOverlay 
                 onSelectPokemon={ findSelectedPokemon } 
                 pokemonList={pokemonList} 
             />
             { selectedPokemon && (
-                <div className="absolute z-10 flex flex-col items-center mt-4"
+                <div className="absolute z-10 items-center mt-4 w-full h-full"
                     style={{
                         bottom: "-100%",
-                        left: "-58%",
+                        left: "-50%",
                         transform: "translateX(-50%)",
                     }}
                 >
                     <PokemonSprite {...selectedPokemon}/>
+                    <p className="absolute description bottom-[5%] left-[8%] w-[80%] text-[1rem]">
+                        {selectedPokemon.description}
+                    </p>
                 </div>
             )}
         </div>
