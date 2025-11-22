@@ -5,24 +5,16 @@ import PokemonDisplayContainer from './components/PokemonDisplayContainer/Pokemo
 function App() {
   const template = require('./assets/pokedex_entry_template_2.jpg');
   return (
-    <div className="App">
-      <header className="App-header relative w-full max-w-[400px] aspect-[256/192] mx-auto">
-        <img
-          src={template}
-          alt="Background"
-          className="w-full h-full"
-        />
+    <div className="relative w-full h-screen max-w-3xl mx-auto">
+      <img
+        src={template}
+        alt="Background"
+        className="w-full h-full z-0"
+      />
 
-        <div
-          className="absolute z-10 yellow-bg p-1 rounded-md max-w-full w-fit sm:w-fit md:w-fit"
-          style={{
-            top: "15%",        // relative to container height
-            left: "50%",       // relative to container width
-          }}
-        >
-          <PokemonDisplayContainer />
-        </div>
-      </header>
+      <div className="displayContainer">
+        <PokemonDisplayContainer />
+      </div>
     </div>
   );
 }

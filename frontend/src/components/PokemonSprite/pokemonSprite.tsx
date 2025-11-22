@@ -7,9 +7,7 @@ const PokemonSprite = (pokemon: PokemonDetails | null) => {
         console.log("Rendering sprite for:", pokemon.spriteUrl);
     }
     return (
-        <div className="spriteContainer">
-            <img src={pokemon.spriteUrl} alt={pokemon.name} className="sprite object-contain mt-2"/>
-        </div>
+        <img src={pokemon.spriteUrl} alt={pokemon.name} className="sprite object-contain mt-2"/>
     )
 }
 

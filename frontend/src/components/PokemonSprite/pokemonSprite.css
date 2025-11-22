@@ -1,11 +1,4 @@
-.spriteContainer {
-    position: absolute;
-    top: -10%;
-    left: 19%;
-    transform: translate(-10%, -10%);
-}
-
 .sprite {
-    width: 20vw;
+    width: 24vw;
     height: auto;
 }

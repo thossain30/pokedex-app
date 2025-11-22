@@ -47,21 +47,21 @@ export default function PokemonDisplayContainer() {
     }
 
     return (
-        <div className="flex flex-col items-center w-full relative">
-            <PokemonSearchOverlay 
-                onSelectPokemon={ findSelectedPokemon } 
-                pokemonList={pokemonList} 
-            />
+        <div className="w-full h-full relative">
+            <div className="searchOverlayContainer">
+                <PokemonSearchOverlay 
+                    onSelectPokemon={ findSelectedPokemon } 
+                    pokemonList={pokemonList} 
+                />
+            </div>
+
             { selectedPokemon && (
-                <div className="absolute z-10 items-center mt-4 w-full h-full"
-                    style={{
-                        bottom: "-100%",
-                        left: "-50%",
-                        transform: "translateX(-50%)",
-                    }}
-                >
-                    <PokemonSprite {...selectedPokemon}/>
-                    <p className="absolute description bottom-[5%] left-[8%] w-[80%] text-[1rem]">
+                <div className="">
+                    <div className="sprite">
+                        <PokemonSprite {...selectedPokemon}/>
+                    </div>
+
+                    <p className="description absolute leading-tight">
                         {selectedPokemon.description}
                     </p>
                 </div>

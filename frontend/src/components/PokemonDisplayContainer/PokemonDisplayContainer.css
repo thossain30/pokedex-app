@@ -1,14 +1,31 @@
-flex-col > * {
-    position: absolute;
+.displayContainer {
+  inset: 0;
+  z-index: 10;
+  position: absolute;
+}
+
+.searchOverlayContainer {
+  z-index: 20;
+  position: absolute;
+  left: 52%;
+  top: 16%;
 }
 
 .description {
-    width: 150%;
-    top: 150%;
-    left: 10%;
-    transform: translateY(150%);
-    font-size: 4.5vw;
-    text-align: left;
-    display: flex;
-    align-items: center;
+  position: absolute;
+  bottom: 8%;
+  left: 5%;
+  width: 90%;
+  font-size: clamp(24px, 4vw, 4vw);
+  color: var(--color-grey);
+  line-height: 1.4;
+  text-align: left;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.sprite {
+  position: absolute;
+  top: 18%;
+  left: 5%;
 }
