@@ -60,6 +60,11 @@ export default function PokemonDisplayContainer() {
                     <p className="description leading-tight">
                         {selectedPokemon.description}
                     </p>
+
+                    <div className="htwt">
+                        <p>{selectedPokemon.height}</p>
+                        <p>{selectedPokemon.weight}</p>
+                    </div>
                 </div>
             )}
         </div>

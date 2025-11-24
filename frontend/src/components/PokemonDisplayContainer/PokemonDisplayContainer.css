@@ -29,3 +29,13 @@
   top: 18%;
   left: 5%;
 }
+
+.htwt {
+  position: absolute;
+  bottom: 38%;
+  right: 5%;
+  font-size: clamp(24px, 5vw, 5.5vw);
+  color: var(--color-grey);
+  display: inline;
+  line-height: 0.9;
+}
