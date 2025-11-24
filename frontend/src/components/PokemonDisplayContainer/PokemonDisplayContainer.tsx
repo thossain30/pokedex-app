@@ -15,8 +15,6 @@ export default function PokemonDisplayContainer() {
                 const res = await fetch(ENDPOINTS.ALL_POKEMON);
                 const data = await res.json();
 
-                console.log(data);
-
                 const list: Pokemon[] = data.map(
                 (poke: { name: string; url: string }) => {
                     const id = parseInt(poke.url.split("/").filter(Boolean).pop()!);
@@ -36,11 +34,9 @@ export default function PokemonDisplayContainer() {
         let data;
         try {
             const match = await fetch(ENDPOINTS.POKEMON_BY_ID(value));
-            console.log("Fetched selected Pokémon:", match);
             data = await match.json();
         } catch(err) {
             console.error("Error fetching selected Pokémon:", err);
-            console.log("Value:", value);
             data = null;
         }
         setSelectedPokemon(data);
@@ -61,7 +57,7 @@ export default function PokemonDisplayContainer() {
                         <PokemonSprite {...selectedPokemon}/>
                     </div>
 
-                    <p className="description absolute leading-tight">
+                    <p className="description leading-tight">
                         {selectedPokemon.description}
                     </p>
                 </div>

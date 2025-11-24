@@ -25,7 +25,6 @@ const PokemonSearchOverlay:React.FC<PokemonSearchOverlayProps> = ({ onSelectPoke
     const handleDropDownChange = (id: number | "") => {
         setSelectedId(id);
         const match = pokemonList.find(p => p.id === id);
-        console.log("Dropdown selected:", id, match);
         setSearch(match ? capitalizeFirstLetter(match.name) : "");
         onSelectPokemon(match ? match.id : "");
     }
