@@ -1,0 +1,8 @@
+.type {
+    aspect-ratio: 20/5;
+    width: 100%;
+    max-width: 48%;
+    height: auto;
+    margin-right: .5vw;
+    display: inline-flex;
+}

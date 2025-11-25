@@ -39,3 +39,12 @@
   display: inline;
   line-height: 0.9;
 }
+
+.typeSprites {
+  position: absolute;
+  width: 40%;
+  height: 9%;
+  left: 57%;
+  top: 33%;
+  display: flex;
+}

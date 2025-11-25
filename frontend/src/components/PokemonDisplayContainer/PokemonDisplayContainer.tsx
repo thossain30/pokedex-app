@@ -4,6 +4,7 @@ import { ENDPOINTS } from "../../config/endpoints";
 import './PokemonDisplayContainer.css';
 import PokemonSearchOverlay from "../PokemonSearchOverlay/PokemonSearchOverlay";
 import PokemonSprite from "../PokemonSprite/pokemonSprite";
+import TypeSprite from "../TypeSprite/typeSprite";
 
 export default function PokemonDisplayContainer() {
     const [selectedPokemon, setSelectedPokemon] = useState<PokemonDetails | null>(null);
@@ -42,6 +43,16 @@ export default function PokemonDisplayContainer() {
         setSelectedPokemon(data);
     }
 
+    const getTypeSprites = (pokemon: PokemonDetails | null) => {
+        if (!pokemon) return null;
+        else if (pokemon.types == null) return null;
+        else {
+            return pokemon.types.map(type => (
+                <TypeSprite {...type} />
+            ))
+        }
+    }
+
     return (
         <div className="w-full h-full relative">
             <div className="searchOverlayContainer">
@@ -52,7 +63,7 @@ export default function PokemonDisplayContainer() {
             </div>
 
             { selectedPokemon && (
-                <div className="">
+                <div>
                     <div className="sprite">
                         <PokemonSprite {...selectedPokemon}/>
                     </div>
@@ -64,6 +75,9 @@ export default function PokemonDisplayContainer() {
                     <div className="htwt">
                         <p>{selectedPokemon.height}</p>
                         <p>{selectedPokemon.weight}</p>
+                    </div>
+                    <div className="typeSprites">
+                        {getTypeSprites(selectedPokemon)}
                     </div>
                 </div>
             )}
