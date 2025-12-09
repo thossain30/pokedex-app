@@ -4,10 +4,14 @@
 }
 
 input {
-    font-size: 5vw;
+    font-size: clamp(48px, 4.5vw, 5.5vw);;
 }
 
 .searchbarContainer {
   background-color: var(--color-yellow);
   color: var(--color-grey);
+}
+
+.nameItem {
+  font-size: 3vw;
 }

@@ -5,6 +5,7 @@ import './PokemonDisplayContainer.css';
 import PokemonSearchOverlay from "../PokemonSearchOverlay/PokemonSearchOverlay";
 import PokemonSprite from "../PokemonSprite/pokemonSprite";
 import TypeSprite from "../TypeSprite/typeSprite";
+import CryButton from "../CryButton/CryButton";
 
 export default function PokemonDisplayContainer() {
     const [selectedPokemon, setSelectedPokemon] = useState<PokemonDetails | null>(null);
@@ -78,6 +79,9 @@ export default function PokemonDisplayContainer() {
                     </div>
                     <div className="typeSprites">
                         {getTypeSprites(selectedPokemon)}
+                    </div>
+                    <div className="CryBtn">
+                        <CryButton {...selectedPokemon} />
                     </div>
                 </div>
             )}

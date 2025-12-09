@@ -10,4 +10,10 @@
 
 select {
   font-size: 2vw;
+  height: auto;
+}
+
+select:focus {
+  max-height: 200px;
+  overflow-y: auto;
 }

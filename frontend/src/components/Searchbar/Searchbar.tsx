@@ -36,7 +36,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange, pokemon }) => {
                     {filtered.map((poke) => (
                         <li 
                             key={ poke.id }
-                            className="px-2 py-1 hover:bg-gray-200 cursor-pointer"
+                            className="px-2 py-1 nameItem"
                             onClick={() => { onChange(capitalizeFirstLetter(poke.name)); }}
                         >
                             {capitalizeFirstLetter(poke.name)}
