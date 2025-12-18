@@ -7,6 +7,8 @@ const CryButton = (pokemon: PokemonDetails | null) => {
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const [progress, setProgress] = useState(0);
     const isPlaying = progress > 0 && progress < 100;
+    const playButton = require('../../assets/play_button.png');
+    const pauseButton = require('../../assets/pause_button.png');
 
     useEffect(() => {
         if (!pokemon) return;
@@ -38,18 +40,16 @@ const CryButton = (pokemon: PokemonDetails | null) => {
     }
 
     return (
-        <button className="cryButton mt-2" onClick={playCry}>
-            <div className="progressWrapper">
-                <CircularProgress variant="determinate" 
-                    value={progress} 
-                    size="13vw" 
-                    sx={{ color: "#f6aad8"}}
-                    />
-                <span className="centerIcon">
-                    {isPlaying ? "⏸" : "▶"}
-                </span>
-            </div>
-        </button>
+        <div className="buttonContainer">
+            <CircularProgress variant="determinate" 
+                value={progress} 
+                size="13vw"
+                sx={{ color: "#fb7fc9ff" }}
+                />
+            <button className="centerIcon" onClick={playCry}>
+                {isPlaying ? <img src={pauseButton} /> : <img src={playButton} />}
+            </button>
+        </div>
     )
 }
 

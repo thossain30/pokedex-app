@@ -1,26 +1,22 @@
-
-:root {
-    --button-color:#f6aad8;
-}
-
-.cryButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.progressWrapper {
+.buttonContainer {
   position: relative;
-  width: 14vw;
-  height: 14vw;
+  width: 100%;
+  height: 100%;
 }
 
 .centerIcon {
   position: absolute;
-  inset: 0;
-  display: grid;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   place-items: center;
-  font-size: 9vw;
-  pointer-events: none;
-  color: var(--button-color);
+  cursor: pointer;
+}
+
+.centerIcon:hover {
+  filter: brightness(110%);
+}
+
+.centerIcon:active {
+  filter: brightness(90%);
 }
