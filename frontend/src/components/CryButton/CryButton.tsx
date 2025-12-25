@@ -46,7 +46,7 @@ const CryButton = (pokemon: PokemonDetails | null) => {
                 size="13vw"
                 sx={{ color: "#fb7fc9ff" }}
                 />
-            <button className="centerIcon" onClick={playCry}>
+            <button className="centerIcon" onClick={playCry} disabled={!pokemon?.cry}>
                 {isPlaying ? <img src={pauseButton} /> : <img src={playButton} />}
             </button>
         </div>

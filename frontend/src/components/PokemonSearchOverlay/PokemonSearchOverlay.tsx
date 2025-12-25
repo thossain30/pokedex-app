@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SearchBar from "../Searchbar/Searchbar";
 import IdDropdown from "../IdDropdown/IdDropdown";
 import { capitalizeFirstLetter } from "../../config/Helpers";
@@ -32,7 +32,7 @@ const PokemonSearchOverlay:React.FC<PokemonSearchOverlayProps> = ({ onSelectPoke
     return (
       <div className="flex flex-col gap-2 w-fit max-w-full overlayContainer mx-auto sm:flex-row">
         <IdDropdown value={selectedId} onChange={handleDropDownChange} pokemon={pokemonList} />
-        <SearchBar value={search} onChange={handleSearchChange} pokemon={pokemonList} />
+        <SearchBar value={search} onChange={handleSearchChange} pokemon={pokemonList}   />
       </div>
     );
 };

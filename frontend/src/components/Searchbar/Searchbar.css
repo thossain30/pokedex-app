@@ -15,3 +15,8 @@ input {
 .nameItem {
   font-size: 3vw;
 }
+
+.active {
+  background-color: var(--color-grey);
+  color: white;
+}

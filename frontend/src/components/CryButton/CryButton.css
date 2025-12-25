@@ -20,3 +20,8 @@
 .centerIcon:active {
   filter: brightness(90%);
 }
+
+.centerIcon:disabled {
+  cursor: not-allowed;
+  filter: grayscale(100%);
+}
