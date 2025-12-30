@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Pokemon, capitalizeFirstLetter } from "../../config/Helpers";
 import './Searchbar.css'
 
@@ -11,6 +11,17 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({ value, onChange, pokemon }) => {
     const [isFocused, setIsFocused] = useState(false);
     const [activeIndex, setActiveIndex] = useState(-1);
+    const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
+
+    
+    useEffect(() => {
+        if (activeIndex >= 0) {
+            itemRefs.current[activeIndex]?.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest'
+            })
+        }
+    }, [activeIndex]);
 
     const filtered = value
     ? pokemon.filter((p) =>
@@ -65,6 +76,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange, pokemon }) => {
                         <li 
                             key={ poke.id }
                             className={`px-2 py-1 nameItem ${activeIndex === index ? 'active' : ''}`}
+                            ref={(el) => { itemRefs.current[index] = el; }}
                             onMouseEnter={() => setActiveIndex(index)}
                             onClick={() => { 
                                 onChange(capitalizeFirstLetter(poke.name)); 
