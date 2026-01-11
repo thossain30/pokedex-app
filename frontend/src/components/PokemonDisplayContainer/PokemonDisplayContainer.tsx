@@ -3,6 +3,7 @@ import { Pokemon, PokemonDetails } from "../../config/Helpers";
 import { ENDPOINTS } from "../../config/endpoints";
 import './PokemonDisplayContainer.css';
 import PokemonSearchOverlay from "../PokemonSearchOverlay/PokemonSearchOverlay";
+import NavArrows from "../NavArrows/NavArrows";
 import PokemonSprite from "../PokemonSprite/pokemonSprite";
 import TypeSprite from "../TypeSprite/typeSprite";
 import CryButton from "../CryButton/CryButton";
@@ -56,10 +57,18 @@ export default function PokemonDisplayContainer() {
 
     return (
         <div className="w-full h-full relative">
+            <div className="navArrows">
+                <NavArrows 
+                    onNavigate={ findSelectedPokemon } 
+                    pokemonList={ pokemonList }
+                    currentPokemon={ selectedPokemon } 
+                />
+            </div>
+
             <div className="searchOverlayContainer">
                 <PokemonSearchOverlay 
                     onSelectPokemon={ findSelectedPokemon } 
-                    pokemonList={pokemonList} 
+                    pokemonList={ pokemonList }
                 />
             </div>
 
