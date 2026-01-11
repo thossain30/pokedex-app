@@ -1,10 +1,5 @@
-:root {
-  --color-yellow: #f9f8c0;
-  --color-grey: #595854;
-}
-
 input {
-    font-size: clamp(48px, 4.5vw, 5.5vw);;
+  font-size: clamp(36px, 3.5vw, 4vw);
 }
 
 .searchbarContainer {

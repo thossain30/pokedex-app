@@ -8,7 +8,7 @@
   z-index: 20;
   position: absolute;
   left: 52%;
-  top: 16%;
+  top: 12%;
 }
 
 .description {
@@ -34,10 +34,19 @@
   position: absolute;
   bottom: 38%;
   right: 5%;
-  font-size: clamp(24px, 5vw, 5.5vw);
+  font-size: clamp(36px, 5vw, 5.5vw);
   color: var(--color-grey);
   display: inline;
   line-height: 0.9;
+}
+
+.title {
+  position: absolute;
+  text-align: center;
+  top: 22%;
+  right: 20%;
+  font-size: clamp(24px, 4.5vw, 5.5vw);
+  color: var(--color-grey);
 }
 
 .typeSprites {

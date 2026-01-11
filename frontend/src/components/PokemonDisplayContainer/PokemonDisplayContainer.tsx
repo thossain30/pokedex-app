@@ -77,6 +77,9 @@ export default function PokemonDisplayContainer() {
                         <p>{selectedPokemon.height}</p>
                         <p>{selectedPokemon.weight}</p>
                     </div>
+                    <div className="title">
+                        <p>{selectedPokemon.title}</p>
+                    </div>
                     <div className="typeSprites">
                         {getTypeSprites(selectedPokemon)}
                     </div>

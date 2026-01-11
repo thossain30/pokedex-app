@@ -67,7 +67,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange, pokemon }) => {
                     setIsFocused(true);
                 }}
                 onBlur={() => setTimeout(() => setIsFocused(false), 200)}
-                className="w-full p-2 px-2 py-1 flex-grow"
+                className="w-full p-2 px-2 py-1 rounded-md flex-grow"
             />
 
             {isFocused && (
