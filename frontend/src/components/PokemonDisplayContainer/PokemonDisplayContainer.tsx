@@ -30,8 +30,8 @@ export default function PokemonDisplayContainer() {
                 console.error("Error fetching Pokémon:", err);
             }
         };
-    fetchPokemonList();
-  }, []);
+        fetchPokemonList();
+    }, []);
 
     const findSelectedPokemon = async (value: string | number) => {
         let data;
@@ -69,6 +69,7 @@ export default function PokemonDisplayContainer() {
                 <PokemonSearchOverlay 
                     onSelectPokemon={ findSelectedPokemon } 
                     pokemonList={ pokemonList }
+                    currentPokemon={ selectedPokemon }
                 />
             </div>
 

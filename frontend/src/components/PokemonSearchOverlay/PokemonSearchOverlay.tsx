@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchBar from "../Searchbar/Searchbar";
 import IdDropdown from "../IdDropdown/IdDropdown";
 import { capitalizeFirstLetter } from "../../config/Helpers";
@@ -8,12 +8,21 @@ import { Pokemon } from "../../config/Helpers";
 interface PokemonSearchOverlayProps {
     pokemonList: Pokemon[];
     onSelectPokemon: (value: string | number) => void;
+    currentPokemon?: { id: number; name: string } | null;
 }
 
 
-const PokemonSearchOverlay:React.FC<PokemonSearchOverlayProps> = ({ onSelectPokemon, pokemonList }) => {
+const PokemonSearchOverlay:React.FC<PokemonSearchOverlayProps> = ({ onSelectPokemon, pokemonList, currentPokemon }) => {
     const [search, setSearch] = useState("");
     const [selectedId, setSelectedId] = useState<number | "">("");
+
+    useEffect(() => {
+        if (!currentPokemon) return;
+
+        setSearch(capitalizeFirstLetter(currentPokemon.name));
+        setSelectedId(currentPokemon.id);
+    }, [currentPokemon]);
+
 
     const handleSearchChange = (value: string) => {
         setSearch(value);

@@ -9,6 +9,8 @@ interface NavArrowsProps {
 }
 
 const NavArrows: React.FC<NavArrowsProps> = ({onNavigate, pokemonList, currentPokemon}) => {
+    const rightArrow = require('../../assets/right_arrow.png');
+    const leftArrow = require('../../assets/left_arrow.png');
     const handleNavigate = (direction: 'prev' | 'next') => {
         let newId = currentPokemon ? currentPokemon.id : null;
         if (!currentPokemon) return;
@@ -37,15 +39,17 @@ const NavArrows: React.FC<NavArrowsProps> = ({onNavigate, pokemonList, currentPo
                 className="navArrow leftArrow" 
                 onClick={() => handleNavigate('prev')}
                 onKeyDown={(e) => handleArrowKeys(e)}
+                disabled={!currentPokemon || currentPokemon.id === 1}
             >
-                prev!
+                <img src={leftArrow} alt="Previous" />
             </button>
             <button 
                 className="navArrow rightArrow" 
                 onClick={() => handleNavigate('next')}
                 onKeyDown={(e) => handleArrowKeys(e)}
+                disabled={!currentPokemon || currentPokemon.id === pokemonList.length}
             >
-                next!
+                <img src={rightArrow} alt="Next" />
             </button>
         </div>
     )

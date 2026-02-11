@@ -1,0 +1,13 @@
+.navArrowsContainer {
+    display: flex;
+    column-gap: 16px;
+}
+
+.navArrowsContainer > *:active {
+    filter: brightness(70%);
+}
+
+.navArrowsContainer > *:disabled {
+  cursor: not-allowed;
+  filter: brightness(40%);
+}

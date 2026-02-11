@@ -65,3 +65,11 @@
   width: 14%;
   height: 21%;
 }
+
+.navArrows {
+  position: absolute;
+  top: 1%;
+  right: 8%;
+  width: 10%;
+  height: 5%;
+}
