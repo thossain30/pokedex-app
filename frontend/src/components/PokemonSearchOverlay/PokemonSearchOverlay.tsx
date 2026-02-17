@@ -17,7 +17,7 @@ const PokemonSearchOverlay:React.FC<PokemonSearchOverlayProps> = ({ onSelectPoke
     const [selectedId, setSelectedId] = useState<number | "">("");
 
     useEffect(() => {
-        if (!currentPokemon) return;
+        if (!currentPokemon || !currentPokemonExists) return;
 
         setSearch(capitalizeFirstLetter(currentPokemon.name));
         setSelectedId(currentPokemon.id);
@@ -37,6 +37,8 @@ const PokemonSearchOverlay:React.FC<PokemonSearchOverlayProps> = ({ onSelectPoke
         setSearch(match ? capitalizeFirstLetter(match.name) : "");
         onSelectPokemon(match ? match.id : "");
     }
+
+    const currentPokemonExists = currentPokemon && pokemonList.some(p => p.name === currentPokemon.name);
     
     return (
       <div className="flex flex-col gap-2 w-fit max-w-full overlayContainer mx-auto sm:flex-row">
