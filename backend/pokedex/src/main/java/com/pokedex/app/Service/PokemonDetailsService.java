@@ -85,7 +85,7 @@ public class PokemonDetailsService {
             Map<String, Object> versionMapping = (Map<String, Object>) sprites.get("versions");
             Map<String, Object> generationSpriteMap = (Map<String, Object>) versionMapping.get(generation);
             Map<String, String> gameSpriteMap = (Map<String, String>) generationSpriteMap.get(gameName);
-            pokemonDto.setSpriteUrl(gameSpriteMap.get("front_default"));
+            pokemonDto.setSpriteUrls(new String[]{gameSpriteMap.get("front_default"), gameSpriteMap.get("front_shiny")});
 
         } catch (NotFound e) {
             logger.error("Failed to fetch sprite for Pokémon: {}", nameOrId);

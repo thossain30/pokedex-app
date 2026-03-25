@@ -5,7 +5,7 @@ import { Pokemon } from '../../config/Helpers';
 interface NavArrowsProps {
     onNavigate: (value: string | number) => void;
     pokemonList: Pokemon[];
-    currentPokemon: { id: number; name: string } | null;
+    currentPokemon: Pokemon | null;
 }
 
 const NavArrows: React.FC<NavArrowsProps> = ({onNavigate, pokemonList, currentPokemon}) => {

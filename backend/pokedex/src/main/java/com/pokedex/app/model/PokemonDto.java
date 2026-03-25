@@ -9,14 +9,14 @@ public class PokemonDto {
     private String title;
     private String height;
     private String weight;
-    private String spriteUrl;
+    private String[] spriteUrls;
     private String cry;
     private List<TypeDto> types;
 
     public PokemonDto() { }
 
     public PokemonDto(String name, int id, String description, String title, 
-                      String height, String weight, String spriteUrl, 
+                      String height, String weight, String[] spriteUrls, 
                       String cry, List<TypeDto> types) {
         this.name = name;
         this.id = id;
@@ -24,7 +24,7 @@ public class PokemonDto {
         this.title = title;
         this.height = height;
         this.weight = weight;
-        this.spriteUrl = spriteUrl;
+        this.spriteUrls = spriteUrls;
         this.cry = cry;
         this.types = types;
     }
@@ -47,8 +47,8 @@ public class PokemonDto {
     public String getWeight() { return weight; }
     public void setWeight(String weight) { this.weight = weight; }
 
-    public String getSpriteUrl() { return spriteUrl; }
-    public void setSpriteUrl(String spriteUrl) { this.spriteUrl = spriteUrl; }
+    public String[] getSpriteUrls() { return spriteUrls; }
+    public void setSpriteUrls(String[] spriteUrls) { this.spriteUrls = spriteUrls; }
 
     public String getCry() { return cry; }
     public void setCry(String cry) { this.cry = cry; }

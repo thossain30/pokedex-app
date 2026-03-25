@@ -11,6 +11,7 @@ import CryButton from "../CryButton/CryButton";
 export default function PokemonDisplayContainer() {
     const [selectedPokemon, setSelectedPokemon] = useState<PokemonDetails | null>(null);
     const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
+    const [isShiny, setIsShiny] = useState(false);
 
     useEffect(() => {
         const fetchPokemonList = async () => {
@@ -73,10 +74,15 @@ export default function PokemonDisplayContainer() {
                 />
             </div>
 
+            <button
+                className="shinyToggle"
+                onClick={() => setIsShiny(!isShiny)}>Toggle Shiny
+            </button>
+
             { selectedPokemon && (
                 <div>
                     <div className="sprite">
-                        <PokemonSprite {...selectedPokemon}/>
+                        <PokemonSprite pokemon={selectedPokemon} isShiny={isShiny} />
                     </div>
 
                     <p className="description leading-tight">

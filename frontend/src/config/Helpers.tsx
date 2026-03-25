@@ -16,7 +16,7 @@ export interface PokemonDetails {
     title: string;
     height: string;
     weight: string;
-    spriteUrl: string;
+    spriteUrls: string[];
     cry: string;
     types: TypeDto[];
 }
