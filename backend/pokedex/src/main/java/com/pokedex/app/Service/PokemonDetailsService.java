@@ -6,8 +6,10 @@ import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.client.HttpClientErrorException.NotFound;
 
 import com.pokedex.app.ApiEndpoints;
@@ -52,6 +54,7 @@ public class PokemonDetailsService {
             pokemonDto.setWeight(Mathmethods.createWeightString((int) pokemonData.get("weight")));
         } catch (NotFound e) {
             logger.warn("Pokemon not found: " + pokemonDto.getName());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pokemon not found");
         }
 
         try {
@@ -74,10 +77,10 @@ public class PokemonDetailsService {
             pokemonDto.setTypes(typeDtos);
         } catch (NotFound e) {
             logger.warn("TypeSprite not found for: {}",  types.toString());
-            return null;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pokemon not found: " + nameOrId);
         } catch (NullPointerException e) {
             logger.error("Failed to fetch typeSprite for type: {}", types.toString());
-            return null;
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Failed to build Pokemon DTO");
         }
 
         try {
@@ -89,6 +92,7 @@ public class PokemonDetailsService {
 
         } catch (NotFound e) {
             logger.error("Failed to fetch sprite for Pokémon: {}", nameOrId);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pokemon not found: " + nameOrId);
         }
         try {
             List<Map<String, Object>> generaMapping = (List<Map<String, Object>>) speciesData.get("genera");
@@ -109,10 +113,10 @@ public class PokemonDetailsService {
             pokemonDto.setDescription(gameDescription);
         } catch (NotFound e) {
             logger.warn("Pokemon not found: " + nameOrId);
-            return null;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pokemon not found: " + nameOrId);
         } catch (Exception e) {
             logger.error("Failed to build Pokemon DTO for idOrName={}, generation={}, game={}", nameOrId, generation, gameName, e);            
-            return null;
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Failed to build Pokemon DTO");
         }
         return pokemonDto;
     }

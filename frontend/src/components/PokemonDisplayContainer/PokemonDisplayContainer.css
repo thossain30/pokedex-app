@@ -76,8 +76,16 @@
 
 .shinyToggle {
   position: absolute;
-  top: 10%;
-  left: 25%;
-  width: 14%;
-  height: 21%;
+  top: 18%;
+  left: 30%;
+  width: 5%;
+  height: 6%;
+}
+
+.shinyToggle :hover {
+  filter: sepia(94%) saturate(200%);
+}
+
+.shiny {
+  filter: sepia(94%) saturate(500%);
 }

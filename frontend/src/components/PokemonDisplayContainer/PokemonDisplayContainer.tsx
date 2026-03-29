@@ -7,6 +7,7 @@ import NavArrows from "../NavArrows/NavArrows";
 import PokemonSprite from "../PokemonSprite/pokemonSprite";
 import TypeSprite from "../TypeSprite/typeSprite";
 import CryButton from "../CryButton/CryButton";
+import { match } from "assert/strict";
 
 export default function PokemonDisplayContainer() {
     const [selectedPokemon, setSelectedPokemon] = useState<PokemonDetails | null>(null);
@@ -17,6 +18,9 @@ export default function PokemonDisplayContainer() {
         const fetchPokemonList = async () => {
             try {
                 const res = await fetch(ENDPOINTS.ALL_POKEMON);
+                if (!res.ok) {
+                    throw new Error("Failed to fetch Pokémon list");
+                }
                 const data = await res.json();
 
                 const list: Pokemon[] = data.map(
@@ -37,7 +41,12 @@ export default function PokemonDisplayContainer() {
     const findSelectedPokemon = async (value: string | number) => {
         let data;
         try {
+            if (!value) return
             const match = await fetch(ENDPOINTS.POKEMON_BY_ID(value));
+            if (!match.ok) {
+                const errorData = await match.json();
+                throw new Error(errorData.message || `Pokemon not found with status ${errorData.status}`);            
+            }
             data = await match.json();
         } catch(err) {
             console.error("Error fetching selected Pokémon:", err);
@@ -75,8 +84,10 @@ export default function PokemonDisplayContainer() {
             </div>
 
             <button
-                className="shinyToggle"
-                onClick={() => setIsShiny(!isShiny)}>Toggle Shiny
+                className={`shinyToggle ${isShiny ? 'shiny' : ''}`}
+                onClick={() => setIsShiny(!isShiny)}
+                >
+                    <img src={require('../../assets/shiny_toggle.png')} alt="Shiny Toggle" />
             </button>
 
             { selectedPokemon && (
