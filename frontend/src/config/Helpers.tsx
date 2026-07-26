@@ -3,6 +3,7 @@ export interface Pokemon {
     id: number
 }
 
+
 export interface TypeDto {
     name: string;
     url: string;
@@ -11,24 +12,13 @@ export interface TypeDto {
 export interface PokemonDetails {
     id: number;
     name: string;
+    description: string;
     title: string;
     height: string;
     weight: string;
-    cry: string;
-    generationsAvailableIn: number[];
-}
-
-export interface GenerationDetails {
-    name: string;
-    genNumId: number;
     spriteUrls: string[];
-    gameNames: string[];
-    typeSpriteUrls: TypeDto[];
-}
-
-export interface DescriptionDto {
-    key: string;
-    description: string;
+    cry: string;
+    types: TypeDto[];
 }
 
 export function capitalizeFirstLetter(str: string) {
