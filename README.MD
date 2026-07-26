@@ -6,6 +6,10 @@ A pokedex app that will display information about a specific pokemon when inputt
 
 ![start](image.png)
 
+## Demo
+
+![demo](https://github.com/user-attachments/assets/c4ba159e-0996-4713-95b4-28c54724af1c)
+
 ## Usage
 Using Java 21, Spring 3.2.0 and Maven 3.9.11
 * Run App.java
