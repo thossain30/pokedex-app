@@ -1,7 +1,6 @@
 package com.pokedex.app;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;

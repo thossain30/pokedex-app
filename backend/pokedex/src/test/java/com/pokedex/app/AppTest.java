@@ -1,5 +1,7 @@
 package com.pokedex.app;
 
+import org.junit.jupiter.api.Test;
+
 /**
  * Unit test for simple App.
  */

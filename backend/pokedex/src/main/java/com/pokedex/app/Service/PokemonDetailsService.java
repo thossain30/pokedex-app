@@ -3,6 +3,7 @@ package com.pokedex.app.Service;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ public class PokemonDetailsService {
     
     private final RestTemplate restTemplate;
     private final TypeSpriteService typeSpriteService;
+    private final Map<String, PokemonDto> cache = new ConcurrentHashMap<>();
     private static final Logger logger = LoggerFactory.getLogger(PokemonDetailsService.class);
 
     public PokemonDetailsService(RestTemplate restTemplate, TypeSpriteService typeSpriteService) {
@@ -38,6 +40,12 @@ public class PokemonDetailsService {
         List<Map<String, Object>> types = null;
         List<Map<String, Object>> pastTypes = null;
         List<TypeDto> typeDtos = null;
+        String cacheKey = nameOrId + "_" + generation + "_" + gameName;
+
+        if (cache.containsKey(cacheKey)) {
+            logger.info("Cache hit for Pokémon: {}", nameOrId);
+            return cache.get(cacheKey);
+        }
 
         try {
             pokemonData = Objects.requireNonNull(restTemplate.getForObject(ApiEndpoints.POKEMON + nameOrId, Map.class));
@@ -77,7 +85,7 @@ public class PokemonDetailsService {
             pokemonDto.setTypes(typeDtos);
         } catch (NotFound e) {
             logger.warn("TypeSprite not found for: {}",  types.toString());
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pokemon not found: " + nameOrId);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "TypeSprite not found: " + nameOrId);
         } catch (NullPointerException e) {
             logger.error("Failed to fetch typeSprite for type: {}", types.toString());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Failed to build Pokemon DTO");
@@ -92,7 +100,7 @@ public class PokemonDetailsService {
 
         } catch (NotFound e) {
             logger.error("Failed to fetch sprite for Pokémon: {}", nameOrId);
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pokemon not found: " + nameOrId);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pokemon Sprite not found: " + nameOrId);
         }
         try {
             List<Map<String, Object>> generaMapping = (List<Map<String, Object>>) speciesData.get("genera");
@@ -113,11 +121,13 @@ public class PokemonDetailsService {
             pokemonDto.setDescription(gameDescription);
         } catch (NotFound e) {
             logger.warn("Pokemon not found: " + nameOrId);
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pokemon not found: " + nameOrId);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pokemon title or description not found: " + nameOrId);
         } catch (Exception e) {
             logger.error("Failed to build Pokemon DTO for idOrName={}, generation={}, game={}", nameOrId, generation, gameName, e);            
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Failed to build Pokemon DTO");
         }
+
+        cache.put(cacheKey, pokemonDto);
         return pokemonDto;
     }
 }
