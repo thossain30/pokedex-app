@@ -4,6 +4,7 @@ import IdDropdown from "../IdDropdown/IdDropdown";
 import { capitalizeFirstLetter } from "../../config/Helpers";
 import './PokemonSearchOverlay.css';
 import { Pokemon } from "../../config/Helpers";
+import TypeFilter from "../TypeFilter/typeFilter";
 
 interface PokemonSearchOverlayProps {
     pokemonList: Pokemon[];
@@ -38,12 +39,17 @@ const PokemonSearchOverlay:React.FC<PokemonSearchOverlayProps> = ({ onSelectPoke
         onSelectPokemon(match ? match.id : "");
     }
 
+    const handleTypeFilterChange = (value: string) => {
+        
+    }
+
     const currentPokemonExists = currentPokemon && pokemonList.some(p => p.name === currentPokemon.name);
     
     return (
       <div className="flex flex-col gap-2 w-fit max-w-full overlayContainer mx-auto sm:flex-row">
         <IdDropdown value={selectedId} onChange={handleDropDownChange} pokemon={pokemonList} />
         <SearchBar value={search} onChange={handleSearchChange} pokemon={pokemonList}   />
+        <TypeFilter value={search} onChange={handleSearchChange} pokemon={pokemonList} />
       </div>
     );
 };
