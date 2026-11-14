@@ -8,12 +8,15 @@ import TypeFilter from "../TypeFilter/typeFilter";
 
 interface PokemonSearchOverlayProps {
     pokemonList: Pokemon[];
+    allPokemon: Pokemon[];
     onSelectPokemon: (value: string | number) => void;
-    currentPokemon?: { id: number; name: string } | null;
+    currentPokemon?: { id: number; name: string; } | null;
+    typeFilter: string;
+    onTypeFilterChange: (value: string) => void;
 }
 
 
-const PokemonSearchOverlay:React.FC<PokemonSearchOverlayProps> = ({ onSelectPokemon, pokemonList, currentPokemon }) => {
+const PokemonSearchOverlay:React.FC<PokemonSearchOverlayProps> = ({ onSelectPokemon, allPokemon, pokemonList, currentPokemon, typeFilter, onTypeFilterChange }) => {
     const [search, setSearch] = useState("");
     const [selectedId, setSelectedId] = useState<number | "">("");
 
@@ -23,7 +26,6 @@ const PokemonSearchOverlay:React.FC<PokemonSearchOverlayProps> = ({ onSelectPoke
         setSearch(capitalizeFirstLetter(currentPokemon.name));
         setSelectedId(currentPokemon.id);
     }, [currentPokemon]);
-
 
     const handleSearchChange = (value: string) => {
         setSearch(value);
@@ -40,7 +42,14 @@ const PokemonSearchOverlay:React.FC<PokemonSearchOverlayProps> = ({ onSelectPoke
     }
 
     const handleTypeFilterChange = (value: string) => {
-        
+        onTypeFilterChange(value);
+        const newList = value ? allPokemon.filter(p => p.typesList?.includes(value.toLowerCase())) : allPokemon;
+
+        if (newList.length === 0) return;
+
+        setSearch(capitalizeFirstLetter(newList[0].name));
+        setSelectedId(newList[0].id);
+        onSelectPokemon(newList[0].name);
     }
 
     const currentPokemonExists = currentPokemon && pokemonList.some(p => p.name === currentPokemon.name);
@@ -49,7 +58,7 @@ const PokemonSearchOverlay:React.FC<PokemonSearchOverlayProps> = ({ onSelectPoke
       <div className="flex flex-col gap-2 w-fit max-w-full overlayContainer mx-auto sm:flex-row">
         <IdDropdown value={selectedId} onChange={handleDropDownChange} pokemon={pokemonList} />
         <SearchBar value={search} onChange={handleSearchChange} pokemon={pokemonList}   />
-        <TypeFilter value={search} onChange={handleSearchChange} pokemon={pokemonList} />
+        <TypeFilter value={typeFilter} onChange={handleTypeFilterChange} pokemon={pokemonList} />
       </div>
     );
 };

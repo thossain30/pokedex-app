@@ -57,15 +57,21 @@ public class PokeApiController {
 
 
     public void setTypesForResults(List<PokemonResults> results) {
+        JsonNode pokemonData, selectedTypes, pastTypes;
         for (PokemonResults result : results) {
-            String cacheKey = "types_" + results.size();
+            String cacheKey = "types_" + result.getName();
             if (cache.containsKey(cacheKey)) {
-                result.setTypes(cache.get(cacheKey).toArray(new String[0]));
+                result.setTypesList(cache.get(cacheKey).toArray(new String[0]));
                 continue;
             }
-            JsonNode pokemonData = restTemplate.getForObject(result.getUrl(), JsonNode.class);
-            JsonNode selectedTypes = pokemonData.path("types");
-            JsonNode pastTypes = pokemonData.path("past_types");
+            try {
+                pokemonData = restTemplate.getForObject(result.getUrl(), JsonNode.class);
+                selectedTypes = pokemonData.path("types");
+                pastTypes = pokemonData.path("past_types");
+            } catch (NullPointerException e) {
+                System.out.println("NullPointerException caught for pokemon: " + result.getName());
+                break;
+            }
 
             if (pastTypes != null && pastTypes.isArray() && pastTypes.size() > 0) {
                 selectedTypes = pastTypes.path("types");
@@ -75,7 +81,7 @@ public class PokeApiController {
             for (JsonNode type : selectedTypes) {
                 typeNames.add(type.path("type").path("name").asText());
             }
-            result.setTypes(typeNames.toArray(new String[0]));
+            result.setTypesList(typeNames.toArray(new String[0]));
         }
     }
 }

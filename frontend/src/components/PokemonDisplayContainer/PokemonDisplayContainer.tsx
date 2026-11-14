@@ -7,12 +7,12 @@ import NavArrows from "../NavArrows/NavArrows";
 import PokemonSprite from "../PokemonSprite/pokemonSprite";
 import TypeSprite from "../TypeSprite/typeSprite";
 import CryButton from "../CryButton/CryButton";
-import { match } from "assert/strict";
 
 export default function PokemonDisplayContainer() {
     const [selectedPokemon, setSelectedPokemon] = useState<PokemonDetails | null>(null);
     const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
     const [isShiny, setIsShiny] = useState(false);
+    const [typeFilter, setTypeFilter] = useState<string>("");
 
     useEffect(() => {
         const fetchPokemonList = async () => {
@@ -24,9 +24,9 @@ export default function PokemonDisplayContainer() {
                 const data = await res.json();
 
                 const list: Pokemon[] = data.map(
-                (poke: { name: string; url: string }) => {
+                (poke: { name: string; url: string; typesList: string[] }) => {
                     const id = parseInt(poke.url.split("/").filter(Boolean).pop()!);
-                    return { id, name: poke.name };
+                    return { id, name: poke.name, typesList: poke.typesList };
                 }
                 );
 
@@ -37,6 +37,8 @@ export default function PokemonDisplayContainer() {
         };
         fetchPokemonList();
     }, []);
+
+    const filteredList = typeFilter ? pokemonList.filter(p => p.typesList?.includes(typeFilter.toLowerCase())) : pokemonList;
 
     const findSelectedPokemon = async (value: string | number) => {
         let data;
@@ -68,18 +70,23 @@ export default function PokemonDisplayContainer() {
     return (
         <div className="w-full h-full relative">
             <div className="navArrows">
-                <NavArrows 
-                    onNavigate={ findSelectedPokemon } 
-                    pokemonList={ pokemonList }
-                    currentPokemon={ selectedPokemon } 
-                />
+                {selectedPokemon && (
+                    <NavArrows 
+                        onNavigate={ findSelectedPokemon } 
+                        pokemonList={ filteredList }
+                        currentPokemon={ {...selectedPokemon, typesList: selectedPokemon?.types.map((t): string => t.name) ?? []} } 
+                    />
+                )}
             </div>
 
             <div className="searchOverlayContainer">
                 <PokemonSearchOverlay 
-                    onSelectPokemon={ findSelectedPokemon } 
-                    pokemonList={ pokemonList }
+                    onSelectPokemon={ findSelectedPokemon }
+                    allPokemon={ pokemonList } 
+                    pokemonList={ typeFilter ? filteredList : pokemonList }
                     currentPokemon={ selectedPokemon }
+                    typeFilter={typeFilter}
+                    onTypeFilterChange={setTypeFilter}
                 />
             </div>
 

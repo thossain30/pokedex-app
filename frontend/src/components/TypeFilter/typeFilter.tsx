@@ -8,7 +8,7 @@ interface TypeFilterProps {
     pokemon: Pokemon[];
 }
 
-const types = ["Normal", "Fire", "Water", "Grass", "Electric", "Ice", "Fighting", "Poison", "Ground", "Flying", "Psychic", "Bug", "Rock", "Ghost", "Dark", "Dragon", "Steel"];
+const types = ["normal", "fire", "water", "grass", "electric", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dark", "dragon", "steel"];
 
 const TypeFilter: React.FC<TypeFilterProps> = ({ value, onChange }) => {
     return (

@@ -1,6 +1,7 @@
 export interface Pokemon {
     name: string,
-    id: number
+    id: number,
+    typesList: string[] | null
 }
 
 

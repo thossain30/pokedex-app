@@ -11,14 +11,20 @@ interface NavArrowsProps {
 const NavArrows: React.FC<NavArrowsProps> = ({onNavigate, pokemonList, currentPokemon}) => {
     const rightArrow = require('../../assets/right_arrow.png');
     const leftArrow = require('../../assets/left_arrow.png');
+
     const handleNavigate = (direction: 'prev' | 'next') => {
+        const currentIndex = pokemonList.findIndex(p => p.id === currentPokemon?.id);
         let newId = currentPokemon ? currentPokemon.id : null;
         if (!currentPokemon) return;
 
-        if (direction === 'prev' && currentPokemon.id > 1) {
-            newId = currentPokemon.id - 1;
-        } else if (direction === 'next' && currentPokemon.id < pokemonList.length) {
-            newId = currentPokemon.id + 1;
+        if (direction === 'prev' && currentIndex >= 0) {
+            if (currentIndex > 0) {
+                newId = pokemonList[currentIndex - 1].id;
+            }
+        } else if (direction === 'next' && currentIndex < pokemonList.length - 1) {
+            if (currentIndex < pokemonList.length - 1) {
+                newId = pokemonList[currentIndex + 1].id;
+            }
         }
 
         const match = pokemonList.find(p => p.id === newId);
@@ -39,7 +45,7 @@ const NavArrows: React.FC<NavArrowsProps> = ({onNavigate, pokemonList, currentPo
                 className="navArrow leftArrow" 
                 onClick={() => handleNavigate('prev')}
                 onKeyDown={(e) => handleArrowKeys(e)}
-                disabled={!currentPokemon || currentPokemon.id === 1}
+                disabled={!currentPokemon || pokemonList[0].id === currentPokemon.id}
             >
                 <img src={leftArrow} alt="Previous" />
             </button>
@@ -47,7 +53,7 @@ const NavArrows: React.FC<NavArrowsProps> = ({onNavigate, pokemonList, currentPo
                 className="navArrow rightArrow" 
                 onClick={() => handleNavigate('next')}
                 onKeyDown={(e) => handleArrowKeys(e)}
-                disabled={!currentPokemon || currentPokemon.id === pokemonList.length}
+                disabled={!currentPokemon || pokemonList[pokemonList.length - 1].id === currentPokemon.id}
             >
                 <img src={rightArrow} alt="Next" />
             </button>
